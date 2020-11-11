@@ -1,1 +1,1 @@
-orientnet is a high performance rpc framework used coroutine.
+orientnet is a high performance c++ server engine.
