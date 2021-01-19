@@ -1,14 +1,7 @@
 #ifdef _LOG_H_
 
 class Log {
-    enum class LogLevel {
-        kTrace = 0,
-        kDebug,
-        kInfo,
-        kWarn,
-        kError,
-        kFatal,
-    }
+    enum class LogLevel : std::int8_t {kTrace = 0, kDebug, kInfo, kWarn, kError, kFatal};
 public:
     void trace(const char *s);
     void debug(const char *s);

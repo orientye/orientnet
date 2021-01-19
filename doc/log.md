@@ -4,6 +4,9 @@
 level
     支持
 
+logger
+    支持
+
 layout与appender
     以sink的方式提供
 
@@ -18,8 +21,6 @@ layout与appender
     [1]按时间大小滚动
     [2]按大小滚动
 
-logger
-    支持
 
 thread-safe:
     支持
