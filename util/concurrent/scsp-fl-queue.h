@@ -41,7 +41,7 @@ struct SCSPFixedLengthQueue {
         if (next == capacity_) {
           next = 0;
         }
-        if (next != write_idx_.load(std::memory_order_acquire)) {
+        if (next != read_idx_.load(std::memory_order_acquire)) {
             new (&data_[cur_write]) T(std::forward<Args>(values)...);
             write_idx_.store(next, std::memory_order_release);
             return true;
