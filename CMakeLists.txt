@@ -5,19 +5,21 @@ project(orientnet VERSION 0.0.1 LANGUAGES C CXX)
 
 include(CMakeDependentOption)
 
-cmake_dependent_option(ORIENTNET_BUILD_TESTS
-  "Build the unit tests when BUILD_TESTING is enabled and we are the root project" ON
+cmake_dependent_option(ORIENTNET_BUILD_TEST
+  "Build the unit tests when BUILD_TEST is enabled and we are the root project" ON
   "BUILD_TEST;CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR" OFF)
 cmake_dependent_option(ORIENTNET_BUILD_BENCH
   "Build the benchmarks when building unit tests and we are the root project" ON
-  "ORIENTNET_BUILD_TESTS" OFF)
+  "ORIENTNET_BUILD_TEST" OFF)
 
 add_library(orientnet STATIC "")
 target_sources(orientnet
   PRIVATE
     "src/util/concurrent/scsp-fl-queue.h"
+    "src/util/log/log.cc"
+    "src/util/log/log.h"
 )
 
-if(PRJ_BUILD_TESTS)
+if(ORIENTNET_BUILD_TEST)
   add_subdirectory(test)
 endif()
