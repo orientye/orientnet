@@ -1,13 +1,17 @@
 project(orientnet-test VERSION 1.0)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+INCLUDE_DIRECTORIES(3rdparty)
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/../)
 
-AUX_SOURCE_DIRECTORY(. SRC)
+#AUX_SOURCE_DIRECTORY(. SRC)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../bin)
 
-add_executable(orientnet-test ${SRC})
+#add_executable(orientnet-test ${SRC})
+
+add_executable(test test.cpp)
+
 
