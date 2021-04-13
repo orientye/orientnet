@@ -1,5 +1,5 @@
 #define DOCTEST_CONFIG_IMPLEMENT
-#include <doctest/doctest.h>
+#include "doctest/doctest.h"
 
 int main(int argc, char **argv) {
     doctest::Context context;
@@ -13,9 +13,10 @@ int main(int argc, char **argv) {
         return res;
     }
 
-    printf("%s\n", "Hello, World!");
+    printf("%s\n", "test for orient-net!");
 }
 
+/*
 int factorial(const int number) {
     return number < 1 ? 1 : number <= 1 ? number : factorial(number - 1) * number;
 }
@@ -27,6 +28,7 @@ TEST_CASE("testing the factorial function") {
     CHECK(factorial(3) == 6);
     CHECK(factorial(10) == 3628800);
 }
+*/
 
 // running notes
 // ./example_exe --no-run (run normal program)
