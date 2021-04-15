@@ -1,12 +1,19 @@
 #include "util/concurrent/scsp-fl-queue.h"
 
 #include <atomic>
+#include <memory>
 #include <thread>
 #include <vector>
 
 #include "doctest/doctest.h"
 
 namespace {
+
+template <class TestType>
+void test() {
+  std::unique_ptr<TestType> const t(new TestType());
+  (*t)();
+}
 
 template <typename T>
 class CorrectTest {
