@@ -11,14 +11,15 @@ namespace {
 
 template <class TestType>
 void test() {
-  std::unique_ptr<TestType> const t(new TestType());
+  std::unique_ptr<TestType> const t(new TestType(0xfffffffe));
   (*t)();
 }
 
 template <typename T>
 class CorrectTest {
  public:
-  CorrectTest() {}
+  CorrectTest(std::uint32_t capacity)
+      : queue_(capacity), produce_finish_(false) {}
 
   void operator()() {
     std::thread producer([this] { this->produce(); });
@@ -41,7 +42,11 @@ class CorrectTest {
 }  // namespace
 
 //////////////////////////////////////////////////////////////////////
-TEST_CASE("SCSPFQ correct") {}
+TEST_CASE("SCSPFQ correct") {
+  test<CorrectTest<int>>();
+  test<CorrectTest<double>>();
+  test<CorrectTest<std::string>>();
+}
 
 TEST_CASE("SCSPFQ perf") {}
 
