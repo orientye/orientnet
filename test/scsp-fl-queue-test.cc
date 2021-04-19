@@ -2,6 +2,7 @@
 
 #include <atomic>
 #include <memory>
+#include <string>
 #include <thread>
 #include <vector>
 
@@ -9,9 +10,21 @@
 
 namespace {
 
-template <class TestType>
+template <typename T>
+struct TestDataGenerator {
+  T limit() const { return 1 << 24; }
+  T generate() const { return rand() % 80; }
+};
+
+template <>
+struct TestDataGenerator<std::string> {
+  unsigned int limit() const { return 1 << 24; }
+  std::string generate() const { return std::string(12, ' '); }
+};
+
+template <class TestType, std::uint32_t capacity>
 void test() {
-  std::unique_ptr<TestType> const t(new TestType(0xfffffffe));
+  std::unique_ptr<TestType> const t(new TestType(capacity));
   (*t)();
 }
 
@@ -19,7 +32,13 @@ template <typename T>
 class CorrectTest {
  public:
   CorrectTest(std::uint32_t capacity)
-      : queue_(capacity), produce_finish_(false) {}
+      : queue_(capacity), produce_finish_(false) {
+    const size_t sz = test_data_generator_.limit();
+    test_data_.reserve(sz);
+    for (size_t i = 0; i < sz; ++i) {
+      test_data_.push_back(test_data_generator_.generate());
+    }
+  }
 
   void operator()() {
     std::thread producer([this] { this->produce(); });
@@ -29,13 +48,35 @@ class CorrectTest {
     consumer.join();
   }
 
-  void produce() {}
+  void produce() {
+    for (auto& data : test_data_) {
+      while (!queue_.write(data)) {
+      }
+    }
+  }
 
-  void consume() {}
+  void consume() {
+    for (auto expect : test_data_) {
+    again:
+      T data;
+      if (!queue_.read(data)) {
+        if (produce_finish_) {
+          if (!queue_.read(data)) {
+            FAIL("produce_finish_ too early");
+            return;
+          }
+        } else {
+          goto again;
+        }
+      }
+      CHECK(data == expect);
+    }
+  }
 
  private:
   SCSPFixedLengthQueue<T> queue_;
-  std::vector<T> testdata_;
+  std::vector<T> test_data_;
+  TestDataGenerator<T> test_data_generator_;
   std::atomic<bool> produce_finish_;
 };
 
@@ -43,9 +84,18 @@ class CorrectTest {
 
 //////////////////////////////////////////////////////////////////////
 TEST_CASE("SCSPFQ correct") {
-  test<CorrectTest<int>>();
-  test<CorrectTest<double>>();
-  test<CorrectTest<std::string>>();
+  test<CorrectTest<int>, 2>();
+  test<CorrectTest<int>, 0xff>();
+  test<CorrectTest<int>, 0xffff>();
+  test<CorrectTest<int>, 0xffffff>();
+  test<CorrectTest<double>, 2>();
+  test<CorrectTest<double>, 0xff>();
+  test<CorrectTest<double>, 0xffff>();
+  test<CorrectTest<double>, 0xffffff>();
+  test<CorrectTest<std::string>, 2>();
+  test<CorrectTest<std::string>, 0xff>();
+  test<CorrectTest<std::string>, 0xffff>();
+  test<CorrectTest<std::string>, 0xffffff>();
 }
 
 TEST_CASE("SCSPFQ perf") {}
