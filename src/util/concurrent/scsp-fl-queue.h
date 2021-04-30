@@ -93,6 +93,7 @@ struct SCSPFixedLengthQueue {
   std::uint32_t capacity_;
   std::atomic<std::uint32_t> read_idx_;
   std::atomic<std::uint32_t> write_idx_;
+  //cache line
 };
 
 #endif  //_SCSP_FIXED_LENGTH_QUEUE_H_
