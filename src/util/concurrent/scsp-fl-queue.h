@@ -2,21 +2,11 @@
 #define _SCSP_FIXED_LENGTH_QUEUE_H_
 
 #include <atomic>
-#include <cstddef>
 #include <cstdint>
 #include <cstdlib>
 #include <new>
 
-#ifdef __cpp_lib_hardware_interference_size
-    using std::hardware_constructive_interference_size;
-    using std::hardware_destructive_interference_size;
-#else
-    // 64 bytes on x86-64 │ L1_CACHE_BYTES │ L1_CACHE_SHIFT │ __cacheline_aligned │ ...
-    constexpr std::size_t hardware_constructive_interference_size
-        = 2 * sizeof(std::max_align_t);
-    constexpr std::size_t hardware_destructive_interference_size
-        = 2 * sizeof(std::max_align_t);
-#endif
+#include "util/align.h"
 
 template <typename T>
 struct SCSPFixedLengthQueue {
@@ -104,9 +94,12 @@ struct SCSPFixedLengthQueue {
   char pad_one_[hardware_destructive_interference_size];
   T* const data_;
   std::uint32_t capacity_;
-  alignas(hardware_destructive_interference_size) std::atomic<std::uint32_t> read_idx_;
-  alignas(hardware_destructive_interference_size) std::atomic<std::uint32_t> write_idx_;
-  char pad_two_[hardware_destructive_interference_size - sizeof(std::atomic<std::uint32_t>)];
+  alignas(hardware_destructive_interference_size)
+      std::atomic<std::uint32_t> read_idx_;
+  alignas(hardware_destructive_interference_size)
+      std::atomic<std::uint32_t> write_idx_;
+  char pad_two_[hardware_destructive_interference_size -
+                sizeof(std::atomic<std::uint32_t>)];
 };
 
 #endif  //_SCSP_FIXED_LENGTH_QUEUE_H_
