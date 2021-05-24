@@ -1,5 +1,5 @@
-#ifndef _SCSP_FIXED_LENGTH_QUEUE_H_
-#define _SCSP_FIXED_LENGTH_QUEUE_H_
+#ifndef _SPSC_FIXED_LENGTH_QUEUE_H_
+#define _SPSC_FIXED_LENGTH_QUEUE_H_
 
 #include <atomic>
 #include <cstdint>
@@ -9,8 +9,8 @@
 #include "util/align.h"
 
 template <typename T>
-struct SCSPFixedLengthQueue {
-  explicit SCSPFixedLengthQueue(std::uint32_t capacity)
+struct SPSCFixedLengthQueue {
+  explicit SPSCFixedLengthQueue(std::uint32_t capacity)
       : capacity_(capacity),
         data_(static_cast<T*>(std::malloc(sizeof(T) * capacity))),
         read_idx_(0),
@@ -20,7 +20,7 @@ struct SCSPFixedLengthQueue {
     }
   }
 
-  ~SCSPFixedLengthQueue() {
+  ~SPSCFixedLengthQueue() {
     if (!std::is_trivially_destructible<T>::value) {
       size_t cur_idx = read_idx_;
       size_t end_idx = write_idx_;
@@ -34,10 +34,10 @@ struct SCSPFixedLengthQueue {
     std::free(data_);
   }
 
-  SCSPFixedLengthQueue(const SCSPFixedLengthQueue&) = delete;
-  SCSPFixedLengthQueue& operator=(const SCSPFixedLengthQueue&) = delete;
-  SCSPFixedLengthQueue(const SCSPFixedLengthQueue&&) = delete;
-  SCSPFixedLengthQueue& operator=(const SCSPFixedLengthQueue&&) = delete;
+  SPSCFixedLengthQueue(const SPSCFixedLengthQueue&) = delete;
+  SPSCFixedLengthQueue& operator=(const SPSCFixedLengthQueue&) = delete;
+  SPSCFixedLengthQueue(const SPSCFixedLengthQueue&&) = delete;
+  SPSCFixedLengthQueue& operator=(const SPSCFixedLengthQueue&&) = delete;
 
   template <class... Args>
   bool write(Args&&... values) {
@@ -102,4 +102,4 @@ struct SCSPFixedLengthQueue {
                 sizeof(std::atomic<std::uint32_t>)];
 };
 
-#endif  //_SCSP_FIXED_LENGTH_QUEUE_H_
+#endif  //_SPSC_FIXED_LENGTH_QUEUE_H_

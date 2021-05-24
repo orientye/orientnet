@@ -1,4 +1,4 @@
-#include "util/concurrent/scsp-fl-queue.h"
+#include "util/concurrent/spsc-fl-queue.h"
 
 #include <atomic>
 #include <memory>
@@ -74,7 +74,7 @@ class CorrectTest {
   }
 
  private:
-  SCSPFixedLengthQueue<T> queue_;
+  SPSCFixedLengthQueue<T> queue_;
   std::vector<T> test_data_;
   TestDataGenerator<T> test_data_generator_;
   std::atomic<bool> produce_finish_;
@@ -83,7 +83,7 @@ class CorrectTest {
 }  // namespace
 
 //////////////////////////////////////////////////////////////////////
-TEST_CASE("SCSPFQ correct") {
+TEST_CASE("SPSCFQ correct") {
   test<CorrectTest<int>, 2>();
   test<CorrectTest<int>, 0xff>();
   test<CorrectTest<int>, 0xffff>();
@@ -98,8 +98,8 @@ TEST_CASE("SCSPFQ correct") {
   test<CorrectTest<std::string>, 0xffffff>();
 }
 
-TEST_CASE("SCSPFQ perf") {}
+TEST_CASE("SPSCFQ perf") {}
 
-TEST_CASE("SCSPFQ destructor") {}
+TEST_CASE("SPSCFQ destructor") {}
 
-TEST_CASE("SCSPFQ empty and full") {}
+TEST_CASE("SPSCFQ empty and full") {}
