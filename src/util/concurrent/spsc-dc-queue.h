@@ -1,5 +1,5 @@
-#ifndef _SPSC_DYNAMIC_LENGTH_QUEUE_H_
-#define _SPSC_DYNAMIC_LENGTH_QUEUE_H_
+#ifndef _SPSC_DYNAMIC_CAPACITY_QUEUE_H_
+#define _SPSC_DYNAMIC_CAPACITY_QUEUE_H_
 
 #include <atomic>
 #include <cstdint>
@@ -99,4 +99,4 @@ class SPSCDynamicLengthQueue {
   SPSCDynamicLengthQueue& operator=(SPSCDynamicLengthQueue const&);
 };
 
-#endif  //_SPSC_DYNAMIC_LENGTH_QUEUE_H_
+#endif  //_SPSC_DYNAMIC_CAPACITY_QUEUE_H_

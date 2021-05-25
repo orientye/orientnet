@@ -1,4 +1,4 @@
-#include "util/concurrent/spsc-fl-queue.h"
+#include "util/concurrent/spsc-fc-queue.h"
 
 #include <atomic>
 #include <memory>
@@ -74,7 +74,7 @@ class CorrectTest {
   }
 
  private:
-  SPSCFixedLengthQueue<T> queue_;
+  SPSCFixedCapacityQueue<T> queue_;
   std::vector<T> test_data_;
   TestDataGenerator<T> test_data_generator_;
   std::atomic<bool> produce_finish_;

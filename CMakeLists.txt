@@ -15,8 +15,8 @@ cmake_dependent_option(ORIENTNET_BUILD_BENCH
 add_library(orientnet STATIC "")
 target_sources(orientnet
   PRIVATE
-    "src/util/concurrent/mpmc-fl-queue.h"
-    "src/util/concurrent/spsc-fl-queue.h"
+    "src/util/concurrent/mpmc-fc-queue.h"
+    "src/util/concurrent/spsc-fc-queue.h"
     "src/util/log/log.cc"
     "src/util/log/log.h"
 )
