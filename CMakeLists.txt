@@ -4,7 +4,6 @@ cmake_minimum_required(VERSION 3.10)
 project(orientnet VERSION 0.0.1 LANGUAGES C CXX)
 
 include(CMakeDependentOption)
-
 cmake_dependent_option(ORIENTNET_BUILD_TEST
   "Build the unit tests when BUILD_TEST is enabled and we are the root project" ON
   "BUILD_TEST;CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR" OFF)
@@ -13,6 +12,9 @@ cmake_dependent_option(ORIENTNET_BUILD_BENCH
   "ORIENTNET_BUILD_TEST" OFF)
 
 add_library(orientnet STATIC "")
+
+target_compile_features(orientnet PRIVATE cxx_std_17)
+
 target_sources(orientnet
   PRIVATE
     "src/util/concurrent/mpmc-fc-queue.h"
