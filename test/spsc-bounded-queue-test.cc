@@ -1,4 +1,4 @@
-#include "util/concurrent/spsc-fc-queue.h"
+#include "util/concurrent/spsc-bounded-queue.h"
 
 #include <atomic>
 #include <memory>
@@ -50,7 +50,7 @@ class CorrectTest {
 
   void produce() {
     for (auto& data : test_data_) {
-      while (!queue_.write(data)) {
+      while (!queue_.enqueue(data)) {
       }
     }
   }
@@ -59,9 +59,9 @@ class CorrectTest {
     for (auto expect : test_data_) {
     again:
       T data;
-      if (!queue_.read(data)) {
+      if (!queue_.dequeue(data)) {
         if (produce_finish_) {
-          if (!queue_.read(data)) {
+          if (!queue_.dequeue(data)) {
             FAIL("produce_finish_ too early");
             return;
           }
@@ -74,7 +74,7 @@ class CorrectTest {
   }
 
  private:
-  SPSCFixedCapacityQueue<T> queue_;
+  SPSCBoundedQueue<T> queue_;
   std::vector<T> test_data_;
   TestDataGenerator<T> test_data_generator_;
   std::atomic<bool> produce_finish_;
@@ -83,7 +83,7 @@ class CorrectTest {
 }  // namespace
 
 //////////////////////////////////////////////////////////////////////
-TEST_CASE("SPSCFQ correct") {
+TEST_CASE("SPSCBQ correct") {
   test<CorrectTest<int>, 2>();
   test<CorrectTest<int>, 0xff>();
   test<CorrectTest<int>, 0xffff>();
@@ -98,8 +98,8 @@ TEST_CASE("SPSCFQ correct") {
   test<CorrectTest<std::string>, 0xffffff>();
 }
 
-TEST_CASE("SPSCFQ perf") {}
+TEST_CASE("SPSCBQ perf") {}
 
-TEST_CASE("SPSCFQ destructor") {}
+TEST_CASE("SPSCBQ destructor") {}
 
-TEST_CASE("SPSCFQ empty and full") {}
+TEST_CASE("SPSCBQ empty and full") {}

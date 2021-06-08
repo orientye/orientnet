@@ -1,5 +1,5 @@
-#ifndef _SPSC_DYNAMIC_CAPACITY_QUEUE_H_
-#define _SPSC_DYNAMIC_CAPACITY_QUEUE_H_
+#ifndef _SPSC_QUEUE_H_
+#define _SPSC_QUEUE_H_
 
 #include <atomic>
 #include <cstdint>
@@ -26,15 +26,15 @@ size_t const cache_line_size = 64;
 
 // single-producer/single-consumer queue
 template <typename T>
-class SPSCDynamicLengthQueue {
+class SPSCQueue {
  public:
-  SPSCDynamicLengthQueue() {
+  SPSCQueue() {
     node* n = new node;
     n->next_ = 0;
     tail_ = head_ = first_ = tail_copy_ = n;
   }
 
-  ~SPSCDynamicLengthQueue() {
+  ~SPSCQueue() {
     node* n = first_;
     do {
       node* next = n->next_;
@@ -95,8 +95,8 @@ class SPSCDynamicLengthQueue {
     return n;
   }
 
-  SPSCDynamicLengthQueue(SPSCDynamicLengthQueue const&);
-  SPSCDynamicLengthQueue& operator=(SPSCDynamicLengthQueue const&);
+  SPSCQueue(SPSCQueue const&);
+  SPSCQueue& operator=(SPSCQueue const&);
 };
 
-#endif  //_SPSC_DYNAMIC_CAPACITY_QUEUE_H_
+#endif  //_SPSC_QUEUE_H_

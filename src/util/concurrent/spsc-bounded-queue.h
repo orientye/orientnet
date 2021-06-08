@@ -1,5 +1,5 @@
-#ifndef _SPSC_FIXED_CAPACITY_QUEUE_H_
-#define _SPSC_FIXED_CAPACITY_QUEUE_H_
+#ifndef _SPSC_BOUNDED_QUEUE_H_
+#define _SPSC_BOUNDED_QUEUE_H_
 
 #include <atomic>
 #include <cstdint>
@@ -9,8 +9,8 @@
 #include "util/align.h"
 
 template <typename T>
-struct SPSCFixedCapacityQueue {
-  explicit SPSCFixedCapacityQueue(std::uint32_t capacity)
+struct SPSCBoundedQueue {
+  explicit SPSCBoundedQueue(std::uint32_t capacity)
       : capacity_(capacity),
         data_(static_cast<T*>(std::malloc(sizeof(T) * capacity))),
         read_idx_(0),
@@ -20,7 +20,7 @@ struct SPSCFixedCapacityQueue {
     }
   }
 
-  ~SPSCFixedCapacityQueue() {
+  ~SPSCBoundedQueue() {
     if (!std::is_trivially_destructible<T>::value) {
       size_t cur_idx = read_idx_;
       size_t end_idx = write_idx_;
@@ -34,13 +34,13 @@ struct SPSCFixedCapacityQueue {
     std::free(data_);
   }
 
-  SPSCFixedCapacityQueue(const SPSCFixedCapacityQueue&) = delete;
-  SPSCFixedCapacityQueue& operator=(const SPSCFixedCapacityQueue&) = delete;
-  SPSCFixedCapacityQueue(const SPSCFixedCapacityQueue&&) = delete;
-  SPSCFixedCapacityQueue& operator=(const SPSCFixedCapacityQueue&&) = delete;
+  SPSCBoundedQueue(const SPSCBoundedQueue&) = delete;
+  SPSCBoundedQueue& operator=(const SPSCBoundedQueue&) = delete;
+  SPSCBoundedQueue(SPSCBoundedQueue&&) = delete;
+  SPSCBoundedQueue& operator=(SPSCBoundedQueue&&) = delete;
 
   template <class... Args>
-  bool write(Args&&... values) {
+  bool enqueue(Args&&... values) {
     auto const cur_write = write_idx_.load(std::memory_order_relaxed);
     auto next = cur_write + 1;
     if (next == capacity_) {
@@ -55,7 +55,7 @@ struct SPSCFixedCapacityQueue {
     return false;
   }
 
-  bool read(T& value) {
+  bool dequeue(T& value) {
     auto const cur_read = read_idx_.load(std::memory_order_relaxed);
     if (cur_read == write_idx_.load(std::memory_order_acquire)) {
       // empty
@@ -102,4 +102,4 @@ struct SPSCFixedCapacityQueue {
                 sizeof(std::atomic<std::uint32_t>)];
 };
 
-#endif  //_SPSC_FIXED_CAPACITY_QUEUE_H_
+#endif  //_SPSC_BOUNDED_QUEUE_H_
