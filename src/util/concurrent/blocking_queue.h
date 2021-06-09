@@ -11,27 +11,25 @@ struct BlockingQueue {
 
   ~BlockingQueue() {}
 
-  void enqueue(T&& v) {
-    {
-      std::unique_lock<std::mutex> lk(mutex_);
-      queue_.push_back(std::move(x));
-    }
-    cv_not_empty.notify_all();
-  }
-
-  T dequeue() {
-    std::unique_lock<std::mutex> lk(mutex_);
-    cv_not_empty.wait(lk, [] { return !queue_.empty() });
-    assert(!queue_.empty());
-    T front(std::move(queue_.front()));
-    queue_.pop_front();
-    return front;
-  }
-
   BlockingQueue(const BlockingQueue&) = delete;
   BlockingQueue& operator=(const BlockingQueue&) = delete;
   BlockingQueue(BlockingQueue&&) = delete;
   BlockingQueue& operator=(BlockingQueue&&) = delete;
+
+  void enqueue(T&& v) {
+    {
+      std::unique_lock<std::mutex> lk(mutex_);
+      queue_.push_back(std::move(v));
+    }
+    cv_not_empty.notify_all();
+  }
+
+  void dequeue(T& v) {
+    std::unique_lock<std::mutex> lk(mutex_);
+    cv_not_empty.wait(lk, [this] { return !queue_.empty(); });
+    v = std::move(queue_.front());
+    queue_.pop_front();
+  }
 
  private:
   std::deque<T> queue_;
@@ -39,4 +37,4 @@ struct BlockingQueue {
   std::condition_variable cv_not_empty;
 };
 
-#endif  //UTIL_CONCURRENT_BLOCING_QUEUE_H_
+#endif  // UTIL_CONCURRENT_BLOCING_QUEUE_H_

@@ -22,8 +22,8 @@ struct SPSCBoundedQueue {
 
   ~SPSCBoundedQueue() {
     if (!std::is_trivially_destructible<T>::value) {
-      size_t cur_idx = read_idx_;
-      size_t end_idx = write_idx_;
+      std::uint32_t cur_idx = read_idx_;
+      std::uint32_t end_idx = write_idx_;
       while (cur_idx != end_idx) {
         data_[cur_idx].~T();
         if (++cur_idx == capacity_) {
