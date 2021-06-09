@@ -1,5 +1,5 @@
-#ifndef _BLOCKGING_BOUNDED_QUEUE_H_
-#define _BLOCKGING_BOUNDED_QUEUE_H_
+#ifndef UTIL_CONCURRENT_BLOCKGING_BOUNDED_QUEUE_H_
+#define UTIL_CONCURRENT_BLOCKGING_BOUNDED_QUEUE_H_
 
 template <typename T>
 struct BlockingBoundedQueue {
@@ -13,4 +13,4 @@ struct BlockingBoundedQueue {
   BlockingBoundedQueue& operator=(BlockingBoundedQueue&&) = delete;
 };
 
-#endif  //_BLOCKGING_BOUNDED_QUEUE_H_
+#endif  //UTIL_CONCURRENT_BLOCKGING_BOUNDED_QUEUE_H_

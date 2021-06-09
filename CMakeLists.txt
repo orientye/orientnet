@@ -17,12 +17,12 @@ target_compile_features(orientnet PRIVATE cxx_std_17)
 
 target_sources(orientnet
   PRIVATE
-    "src/util/concurrent/blocking-bounded-queue.h"
-    "src/util/concurrent/blocking-queue.h"
-    "src/util/concurrent/mpmc-bounded-queue.h"
-    "src/util/concurrent/mpmc-queue.h"
-    "src/util/concurrent/spsc-bounded-queue.h"
-    "src/util/concurrent/spsc-queue.h"
+    "src/util/concurrent/blocking_bounded_queue.h"
+    "src/util/concurrent/blocking_queue.h"
+    "src/util/concurrent/mpmc_bounded_queue.h"
+    "src/util/concurrent/mpmc_queue.h"
+    "src/util/concurrent/spsc_bounded_queue.h"
+    "src/util/concurrent/spsc_queue.h"
     "src/util/log/log.cc"
     "src/util/log/log.h"
 )

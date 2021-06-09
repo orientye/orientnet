@@ -1,5 +1,5 @@
-#ifndef _SPSC_QUEUE_H_
-#define _SPSC_QUEUE_H_
+#ifndef UTIL_CONCURRENT_SPSC_QUEUE_H_
+#define UTIL_CONCURRENT_SPSC_QUEUE_H_
 
 #include <atomic>
 #include <cstdint>
@@ -99,4 +99,4 @@ class SPSCQueue {
   SPSCQueue& operator=(SPSCQueue const&);
 };
 
-#endif  //_SPSC_QUEUE_H_
+#endif  //UTIL_CONCURRENT_SPSC_QUEUE_H_

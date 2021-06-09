@@ -1,5 +1,5 @@
-#ifndef _MPMC_QUEUE_H_
-#define _MPMC_QUEUE_H_
+#ifndef UTIL_CONCURRENT_MPMC_QUEUE_H_
+#define UTIL_CONCURRENT_MPMC_QUEUE_H_
 
 template <typename T>
 struct MPMCQueue {
@@ -15,4 +15,4 @@ struct MPMCQueue {
   MPMCQueue& operator=(MPMCFixedCapacityQueue&&) = delete;
 };
 
-#endif  //_MPMC_QUEUE_H_
+#endif  //UTIL_CONCURRENT_MPMC_QUEUE_H_

@@ -1,5 +1,5 @@
-#ifndef _BLOCING_QUEUE_H_
-#define _BLOCING_QUEUE_H_
+#ifndef UTIL_CONCURRENT_BLOCING_QUEUE_H_
+#define UTIL_CONCURRENT_BLOCING_QUEUE_H_
 
 #include <condition_variable>
 #include <deque>
@@ -39,4 +39,4 @@ struct BlockingQueue {
   std::condition_variable cv_not_empty;
 };
 
-#endif  //_BLOCING_QUEUE_H_
+#endif  //UTIL_CONCURRENT_BLOCING_QUEUE_H_

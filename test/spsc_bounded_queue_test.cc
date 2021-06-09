@@ -1,4 +1,4 @@
-#include "util/concurrent/spsc-bounded-queue.h"
+#include "util/concurrent/spsc_bounded_queue.h"
 
 #include <atomic>
 #include <memory>

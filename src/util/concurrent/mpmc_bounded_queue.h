@@ -1,5 +1,5 @@
-#ifndef _MPMC_BOUNDED_QUEUE_H_
-#define _MPMC_BOUNDED_QUEUE_H_
+#ifndef UTIL_CONCURRENT_MPMC_BOUNDED_QUEUE_H_
+#define UTIL_CONCURRENT_MPMC_BOUNDED_QUEUE_H_
 
 template <typename T>
 struct MPMCBoundedQueue {
@@ -13,4 +13,4 @@ struct MPMCBoundedQueue {
   MPMCBoundedQueue& operator=(MPMCBoundedQueue&&) = delete;
 };
 
-#endif  //_MPMC_BOUNDED_QUEUE_H_
+#endif  //UTIL_CONCURRENT_MPMC_BOUNDED_QUEUE_H_

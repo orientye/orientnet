@@ -1,5 +1,5 @@
-#ifndef _SPSC_BOUNDED_QUEUE_H_
-#define _SPSC_BOUNDED_QUEUE_H_
+#ifndef UTIL_CONCURRENT_SPSC_BOUNDED_QUEUE_H_
+#define UTIL_CONCURRENT_SPSC_BOUNDED_QUEUE_H_
 
 #include <atomic>
 #include <cstdint>
@@ -102,4 +102,4 @@ struct SPSCBoundedQueue {
                 sizeof(std::atomic<std::uint32_t>)];
 };
 
-#endif  //_SPSC_BOUNDED_QUEUE_H_
+#endif  //UTIL_CONCURRENT_SPSC_BOUNDED_QUEUE_H_
