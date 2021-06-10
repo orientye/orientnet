@@ -20,8 +20,8 @@ struct BlockingBoundedQueue {
 
   ~BlockingBoundedQueue() {
     if (!std::is_trivially_destructible<T>::value) {
-      std::uint32_t cur_idx = read_idx_;
-      std::uint32_t end_idx = write_idx_;
+      auto cur_idx = read_idx_;
+      auto end_idx = write_idx_;
       while (cur_idx != end_idx) {
         data_[cur_idx].~T();
         if (++cur_idx == capacity_) {
@@ -37,7 +37,8 @@ struct BlockingBoundedQueue {
   BlockingBoundedQueue(BlockingBoundedQueue&&) = delete;
   BlockingBoundedQueue& operator=(BlockingBoundedQueue&&) = delete;
 
-  void enqueue(T&& v) {
+  template <class... Args>
+  void enqueue(Args&&... args) {
     std::unique_lock<std::mutex> lk(mutex_);
     cv_not_full.wait(lk, [this] {
       auto const cur_write = write_idx_;
@@ -52,7 +53,7 @@ struct BlockingBoundedQueue {
     if (next == capacity_) {
       next = 0;
     }
-    new (&data_[cur_write]) T(v);
+    new (&data_[cur_write]) T(std::forward<Args>(args)...);
     write_idx_ = next;
     cv_not_empty.notify_all();
   }

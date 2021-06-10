@@ -8,8 +8,8 @@ target_compile_features(test PRIVATE cxx_std_17)
 
 target_include_directories(test
   PRIVATE
-    "3rdparty"
     "${PROJECT_SOURCE_DIR}/../src"
+    "${PROJECT_SOURCE_DIR}/.."
 )
 
 AUX_SOURCE_DIRECTORY(. SRC)

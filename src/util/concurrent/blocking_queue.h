@@ -16,10 +16,11 @@ struct BlockingQueue {
   BlockingQueue(BlockingQueue&&) = delete;
   BlockingQueue& operator=(BlockingQueue&&) = delete;
 
-  void enqueue(T&& v) {
+  template <class... Args>
+  void enqueue(Args&&... args) {
     {
       std::unique_lock<std::mutex> lk(mutex_);
-      queue_.push_back(std::move(v));
+      queue_.emplace_back(std::forward<Args>(args)...);
     }
     cv_not_empty.notify_all();
   }

@@ -1,24 +1,25 @@
 #define DOCTEST_CONFIG_IMPLEMENT
-#include "doctest/doctest.h"
+#include "test/3rdparty/doctest/doctest.h"
 
 int main(int argc, char **argv) {
-    doctest::Context context;
-    context.applyCommandLine(argc, argv);
+  doctest::Context context;
+  context.applyCommandLine(argc, argv);
 
-    int res = context.run(); // run doctest
+  int res = context.run();  // run doctest
 
-    // important - query flags (and --exit) rely on the user doing this
-    if (context.shouldExit()) {
-        // propagate the result of the tests
-        return res;
-    }
+  // important - query flags (and --exit) rely on the user doing this
+  if (context.shouldExit()) {
+    // propagate the result of the tests
+    return res;
+  }
 
-    printf("%s\n", "test for orient-net!");
+  printf("%s\n", "test for orient-net!");
 }
 
 /*
 int factorial(const int number) {
-    return number < 1 ? 1 : number <= 1 ? number : factorial(number - 1) * number;
+    return number < 1 ? 1 : number <= 1 ? number : factorial(number - 1) *
+number;
 }
 
 TEST_CASE("testing the factorial function") {

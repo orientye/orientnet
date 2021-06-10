@@ -6,7 +6,7 @@
 #include <thread>
 #include <vector>
 
-#include "doctest/doctest.h"
+#include "test/3rdparty/doctest/doctest.h"
 
 namespace {
 
@@ -19,7 +19,6 @@ struct TestDataGenerator {
 template <>
 struct TestDataGenerator<std::string> {
   unsigned int limit() const { return 1 << 24; }
-  // unsigned int limit() const { return 1 << 16; }
   std::string generate() const { return std::string(12, ' '); }
 };
 
@@ -51,8 +50,7 @@ class CorrectTest {
 
   void produce() {
     for (auto& data : test_data_) {
-      T t = data;
-      queue_.enqueue(std::forward<T>(t));
+      queue_.enqueue(data);
     }
   }
 
@@ -75,18 +73,22 @@ class CorrectTest {
 
 //////////////////////////////////////////////////////////////////////
 TEST_CASE("BBQ correct") {
-  // test<CorrectTest<int>, 2>();
-  // test<CorrectTest<int>, 0xff>();
-  // test<CorrectTest<int>, 0xffff>();
-  // test<CorrectTest<int>, 0xffffff>();
-  // test<CorrectTest<double>, 2>();
-  // test<CorrectTest<double>, 0xff>();
-  // test<CorrectTest<double>, 0xffff>();
-  // test<CorrectTest<double>, 0xffffff>();
-  // test<CorrectTest<std::string>, 2>();
-  // test<CorrectTest<std::string>, 0xff>();
-  // test<CorrectTest<std::string>, 0xffff>();
-  // test<CorrectTest<std::string>, 0xffffff>();
+  //   clock_t start = clock();
+  //   test<CorrectTest<int>, 2>();
+  //   test<CorrectTest<int>, 0xff>();
+  //   test<CorrectTest<int>, 0xffff>();
+  //   test<CorrectTest<int>, 0xffffff>();
+  //   test<CorrectTest<double>, 2>();
+  //   test<CorrectTest<double>, 0xff>();
+  //   test<CorrectTest<double>, 0xffff>();
+  //   test<CorrectTest<double>, 0xffffff>();
+  //   test<CorrectTest<std::string>, 2>();
+  //   test<CorrectTest<std::string>, 0xff>();
+  //   test<CorrectTest<std::string>, 0xffff>();
+  //   test<CorrectTest<std::string>, 0xffffff>();
+  //   double duration = (double)(clock() - start) / CLOCKS_PER_SEC;
+  //   printf("%f seconds\n", duration);
+  //   //2404.815024 seconds
 }
 
 TEST_CASE("BBQ perf") {}
