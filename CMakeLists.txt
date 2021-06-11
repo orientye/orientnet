@@ -21,6 +21,7 @@ target_sources(orientnet
     "src/util/concurrent/blocking_queue.h"
     "src/util/concurrent/mpmc_bounded_queue.h"
     "src/util/concurrent/mpmc_queue.h"
+    "src/util/concurrent/spin_lock.h"
     "src/util/concurrent/spsc_bounded_queue.h"
     "src/util/concurrent/spsc_queue.h"
     "src/util/log/log.cc"
