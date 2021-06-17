@@ -72,7 +72,7 @@ class CorrectTest {
 
 //////////////////////////////////////////////////////////////////////
 TEST_CASE("BQ correct") {
-//   clock_t start = clock();
+//   auto start = std::chrono::steady_clock::now();
 //   test<CorrectTest<int>, 2>();
 //   test<CorrectTest<int>, 0xff>();
 //   test<CorrectTest<int>, 0xffff>();
@@ -85,9 +85,10 @@ TEST_CASE("BQ correct") {
 //   test<CorrectTest<std::string>, 0xff>();
 //   test<CorrectTest<std::string>, 0xffff>();
 //   test<CorrectTest<std::string>, 0xffffff>();
-//   double duration = (double)(clock() - start) / CLOCKS_PER_SEC;
-//   printf("%f seconds\n", duration);
-//   //141.475220 seconds
+//   printf("nano seconds: %llu",
+//          std::chrono::duration_cast<std::chrono::nanoseconds>(
+//              std::chrono::steady_clock::now() - start)
+//              .count());
 }
 
 TEST_CASE("BQ perf") {}

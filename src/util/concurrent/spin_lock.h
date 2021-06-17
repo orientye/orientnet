@@ -6,7 +6,7 @@
 // https://rigtorp.se/spinlock/
 
 struct SpinLock {
-  std::atomic<bool> lock_ = {0};
+  std::atomic<bool> lock_= { false };
 
   void lock() noexcept {
     for (;;) {
@@ -39,6 +39,8 @@ struct SpinLock {
 #endif
 
 #endif  // defined(__i386__) || defined(__x86_64__)
+
+//std::this_thread::yield()?
       }
     }
   }
