@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "test/3rdparty/doctest/doctest.h"
+#include "test/benchmark.h"
 
 namespace {
 
@@ -72,23 +73,20 @@ class CorrectTest {
 
 //////////////////////////////////////////////////////////////////////
 TEST_CASE("BQ correct") {
-//   auto start = std::chrono::steady_clock::now();
-//   test<CorrectTest<int>, 2>();
-//   test<CorrectTest<int>, 0xff>();
-//   test<CorrectTest<int>, 0xffff>();
-//   test<CorrectTest<int>, 0xffffff>();
-//   test<CorrectTest<double>, 2>();
-//   test<CorrectTest<double>, 0xff>();
-//   test<CorrectTest<double>, 0xffff>();
-//   test<CorrectTest<double>, 0xffffff>();
-//   test<CorrectTest<std::string>, 2>();
-//   test<CorrectTest<std::string>, 0xff>();
-//   test<CorrectTest<std::string>, 0xffff>();
-//   test<CorrectTest<std::string>, 0xffffff>();
-//   printf("nano seconds: %llu",
-//          std::chrono::duration_cast<std::chrono::nanoseconds>(
-//              std::chrono::steady_clock::now() - start)
-//              .count());
+  Benchmark bm;
+  test<CorrectTest<int>, 2>();
+  test<CorrectTest<int>, 0xff>();
+  test<CorrectTest<int>, 0xffff>();
+  test<CorrectTest<int>, 0xffffff>();
+  test<CorrectTest<double>, 2>();
+  test<CorrectTest<double>, 0xff>();
+  test<CorrectTest<double>, 0xffff>();
+  test<CorrectTest<double>, 0xffffff>();
+  test<CorrectTest<std::string>, 2>();
+  test<CorrectTest<std::string>, 0xff>();
+  test<CorrectTest<std::string>, 0xffff>();
+  test<CorrectTest<std::string>, 0xffffff>();
+  bm.count("BQ correct");
 }
 
 TEST_CASE("BQ perf") {}

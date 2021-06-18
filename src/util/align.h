@@ -1,5 +1,5 @@
-#ifndef _ALIGN_H_
-#define _ALIGN_H_
+#ifndef UTIL_ALIGN_H_
+#define UTIL_ALIGN_H_
 
 #include <cstddef>
 #include <new>
@@ -16,4 +16,4 @@ constexpr std::size_t hardware_destructive_interference_size =
     2 * sizeof(std::max_align_t);
 #endif
 
-#endif  //_ALIGN_H_
+#endif  // UTIL_ALIGN_H_
