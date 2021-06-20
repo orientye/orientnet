@@ -85,7 +85,7 @@ TEST_CASE("BQ correct") {
   // test<CorrectTest<std::string>, 2>();
   // test<CorrectTest<std::string>, 0xff>();
   // test<CorrectTest<std::string>, 0xffff>();
-  test<CorrectTest<std::string>, 0xffffff>();
+  //test<CorrectTest<std::string>, 0xffffff>();
   bm.count("BQ correct");
 }
 
