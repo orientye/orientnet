@@ -74,18 +74,18 @@ class CorrectTest {
 //////////////////////////////////////////////////////////////////////
 TEST_CASE("BQ correct") {
   Benchmark bm;
-  // test<CorrectTest<int>, 2>();
-  // test<CorrectTest<int>, 0xff>();
-  // test<CorrectTest<int>, 0xffff>();
-  // test<CorrectTest<int>, 0xffffff>();
-  // test<CorrectTest<double>, 2>();
-  // test<CorrectTest<double>, 0xff>();
-  // test<CorrectTest<double>, 0xffff>();
-  // test<CorrectTest<double>, 0xffffff>();
-  // test<CorrectTest<std::string>, 2>();
-  // test<CorrectTest<std::string>, 0xff>();
-  // test<CorrectTest<std::string>, 0xffff>();
-  //test<CorrectTest<std::string>, 0xffffff>();
+//   test<CorrectTest<int>, 2>();
+//   test<CorrectTest<int>, 0xff>();
+//   test<CorrectTest<int>, 0xffff>();
+//   test<CorrectTest<int>, 0xffffff>();
+//   test<CorrectTest<double>, 2>();
+//   test<CorrectTest<double>, 0xff>();
+//   test<CorrectTest<double>, 0xffff>();
+//   test<CorrectTest<double>, 0xffffff>();
+//   test<CorrectTest<std::string>, 2>();
+//   test<CorrectTest<std::string>, 0xff>();
+//   test<CorrectTest<std::string>, 0xffff>();
+//   test<CorrectTest<std::string>, 0xffffff>();
   bm.count("BQ correct");
 }
 

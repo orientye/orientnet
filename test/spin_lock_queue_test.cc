@@ -1,14 +1,10 @@
-#include "util/concurrent/blocking_bounded_queue.h"
-
-#include <atomic>
-#include <memory>
 #include <string>
 #include <thread>
 #include <vector>
 
 #include "test/3rdparty/doctest/doctest.h"
-
 #include "test/benchmark.h"
+#include "util/concurrent/spinlock_queue.h"
 
 namespace {
 
@@ -33,8 +29,7 @@ void test() {
 template <typename T>
 class CorrectTest {
  public:
-  CorrectTest(std::uint32_t capacity)
-      : queue_(capacity), produce_finish_(false) {
+  CorrectTest(std::uint32_t capacity) : produce_finish_(false) {
     const size_t sz = test_data_generator_.limit();
     test_data_.reserve(sz);
     for (size_t i = 0; i < sz; ++i) {
@@ -58,14 +53,24 @@ class CorrectTest {
 
   void consume() {
     for (auto expect : test_data_) {
+    again:
       T data;
-      queue_.dequeue(data);
+      if (!queue_.dequeue(data)) {
+        if (produce_finish_) {
+          if (!queue_.dequeue(data)) {
+            FAIL("produce_finish_ too early");
+            return;
+          }
+        } else {
+          goto again;
+        }
+      }
       CHECK(data == expect);
     }
   }
 
  private:
-  BlockingBoundedQueue<T> queue_;
+  SpinLockQueue<T> queue_;
   std::vector<T> test_data_;
   TestDataGenerator<T> test_data_generator_;
   std::atomic<bool> produce_finish_;
@@ -74,25 +79,25 @@ class CorrectTest {
 }  // namespace
 
 //////////////////////////////////////////////////////////////////////
-TEST_CASE("BBQ correct") {
+TEST_CASE("SpinLockQueue correct") {
   Benchmark bm;
-  // test<CorrectTest<int>, 2>();
-  // test<CorrectTest<int>, 0xff>();
-  // test<CorrectTest<int>, 0xffff>();
-  // test<CorrectTest<int>, 0xffffff>();
-  // test<CorrectTest<double>, 2>();
-  // test<CorrectTest<double>, 0xff>();
-  // test<CorrectTest<double>, 0xffff>();
-  // test<CorrectTest<double>, 0xffffff>();
-  // test<CorrectTest<std::string>, 2>();
-  // test<CorrectTest<std::string>, 0xff>();
-  // test<CorrectTest<std::string>, 0xffff>();
-  //test<CorrectTest<std::string>, 0xffffff>();
-  bm.count("BBQ correct");
+  test<CorrectTest<int>, 2>();
+  test<CorrectTest<int>, 0xff>();
+  test<CorrectTest<int>, 0xffff>();
+  test<CorrectTest<int>, 0xffffff>();
+  test<CorrectTest<double>, 2>();
+  test<CorrectTest<double>, 0xff>();
+  test<CorrectTest<double>, 0xffff>();
+  test<CorrectTest<double>, 0xffffff>();
+  test<CorrectTest<std::string>, 2>();
+  test<CorrectTest<std::string>, 0xff>();
+  test<CorrectTest<std::string>, 0xffff>();
+  test<CorrectTest<std::string>, 0xffffff>();
+  bm.count("SpinLockQueue correct");
 }
 
-TEST_CASE("BBQ perf") {}
+TEST_CASE("SpinLockQueue perf") {}
 
-TEST_CASE("BBQ destructor") {}
+TEST_CASE("SpinLockQueue destructor") {}
 
-TEST_CASE("BBQ empty and full") {}
+TEST_CASE("SpinLockQueue empty and full") {}
