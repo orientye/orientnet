@@ -10,14 +10,16 @@
 template <typename T>
 T load_consume(T const* addr) {  // hardware fence is implicit on x86
   T v = *const_cast<T const volatile*>(addr);
-  __memory_barrier();  // compiler fence
+  //__memory_barrier();  // compiler fence
+  std::atomic_thread_fence(std::memory_order_acquire);
   return v;
 }
 
 // store with 'release' memory ordering
 template <typename T>
 void store_release(T* addr, T v) {  // hardware fence is implicit on x86
-  __memory_barrier();               // compiler fence
+  //__memory_barrier();               // compiler fence
+  std::atomic_thread_fence(std::memory_order_release);
   *const_cast<T volatile*>(addr) = v;
 }
 

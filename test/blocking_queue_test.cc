@@ -72,8 +72,8 @@ class CorrectTest {
 }  // namespace
 
 //////////////////////////////////////////////////////////////////////
-TEST_CASE("BQ correct") {
-  Benchmark bm;
+TEST_CASE("BlockingQueue correct") {
+//   Benchmark bm;
 //   test<CorrectTest<int>, 2>();
 //   test<CorrectTest<int>, 0xff>();
 //   test<CorrectTest<int>, 0xffff>();
@@ -86,11 +86,11 @@ TEST_CASE("BQ correct") {
 //   test<CorrectTest<std::string>, 0xff>();
 //   test<CorrectTest<std::string>, 0xffff>();
 //   test<CorrectTest<std::string>, 0xffffff>();
-  bm.count("BQ correct");
+//   bm.count("BlockingQueue correct");
 }
 
-TEST_CASE("BQ perf") {}
+TEST_CASE("BlockingQueue perf") {}
 
-TEST_CASE("BQ destructor") {}
+TEST_CASE("BlockingQueue destructor") {}
 
-TEST_CASE("BQ empty and full") {}
+TEST_CASE("BlockingQueue empty and full") {}
