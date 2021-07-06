@@ -1,3 +1,7 @@
+// Copyright (c) 2021 The orientnet Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file. See the AUTHORS file for names of contributors.
+
 #ifndef TEST_BENCHMARK_H_
 #define TEST_BENCHMARK_H_
 
@@ -23,4 +27,5 @@ struct Benchmark {
  private:
   std::chrono::time_point<std::chrono::steady_clock> start_;
 };
+
 #endif  // TEST_BENCHMARK_H_

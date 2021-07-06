@@ -1,3 +1,7 @@
+// Copyright (c) 2021 The orientnet Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file. See the AUTHORS file for names of contributors.
+
 #include "util/concurrent/spsc_queue.h"
 
 #include <atomic>
@@ -32,7 +36,7 @@ void test() {
 template <typename T>
 class CorrectTest {
  public:
-  CorrectTest(std::uint32_t capacity)
+  explicit CorrectTest(std::uint32_t capacity)
       : queue_(), produce_finish_(false) {
     const size_t sz = test_data_generator_.limit();
     test_data_.reserve(sz);
@@ -84,20 +88,20 @@ class CorrectTest {
 
 //////////////////////////////////////////////////////////////////////
 TEST_CASE("SPSCQueue correct") {
-    // Benchmark bm;
-    // test<CorrectTest<int>, 2>();
-    // test<CorrectTest<int>, 0xff>();
-    // test<CorrectTest<int>, 0xffff>();
-    // test<CorrectTest<int>, 0xffffff>();
-    // test<CorrectTest<double>, 2>();
-    // test<CorrectTest<double>, 0xff>();
-    // test<CorrectTest<double>, 0xffff>();
-    // test<CorrectTest<double>, 0xffffff>();
-    // test<CorrectTest<std::string>, 2>();
-    // test<CorrectTest<std::string>, 0xff>();
-    // test<CorrectTest<std::string>, 0xffff>();
-    // test<CorrectTest<std::string>, 0xffffff>();
-    // bm.count("SPSCQueue correct");
+  // Benchmark bm;
+  // test<CorrectTest<int>, 2>();
+  // test<CorrectTest<int>, 0xff>();
+  // test<CorrectTest<int>, 0xffff>();
+  // test<CorrectTest<int>, 0xffffff>();
+  // test<CorrectTest<double>, 2>();
+  // test<CorrectTest<double>, 0xff>();
+  // test<CorrectTest<double>, 0xffff>();
+  // test<CorrectTest<double>, 0xffffff>();
+  // test<CorrectTest<std::string>, 2>();
+  // test<CorrectTest<std::string>, 0xff>();
+  // test<CorrectTest<std::string>, 0xffff>();
+  // test<CorrectTest<std::string>, 0xffffff>();
+  // bm.count("SPSCQueue correct");
 }
 
 TEST_CASE("SPSCQueue perf") {}

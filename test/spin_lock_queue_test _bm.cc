@@ -1,3 +1,7 @@
+// Copyright (c) 2021 The orientnet Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file. See the AUTHORS file for names of contributors.
+
 #include <string>
 #include <thread>
 #include <vector>
@@ -12,7 +16,7 @@ namespace {
 // https://rigtorp.se/spinlock/
 
 struct SpinLockPause {
-  std::atomic<bool> lock_= { false };
+  std::atomic<bool> lock_ = {false};
 
   void lock() noexcept {
     for (;;) {
@@ -25,7 +29,7 @@ struct SpinLockPause {
 // Issue X86 PAUSE or ARM YIELD instruction to reduce contention between
 // hyper-threads
 
-//https://github.com/dotnet/coreclr/blob/0fbd855e38bc3ec269479b5f6bf561dcfd67cbb6/src/gc/env/gcenv.base.h
+// https://github.com/dotnet/coreclr/blob/0fbd855e38bc3ec269479b5f6bf561dcfd67cbb6/src/gc/env/gcenv.base.h
 #if defined(__i386__) || defined(__x86_64__)
 
 #define YieldProcessor __builtin_ia32_pause
@@ -41,7 +45,7 @@ struct SpinLockPause {
 
 #endif  // defined(__i386__) || defined(__x86_64__)
 
-//std::this_thread::yield();?
+        // std::this_thread::yield();?
       }
     }
   }
@@ -71,13 +75,15 @@ struct SpinLockGcc {
   void unlock() { __sync_lock_release(&lock_); }
 };
 
-
 ////////////////////////////////////////////////////////////////////////////////////
 
 struct SpinLocBoolAtomic {
   std::atomic<bool> lock_ = {false};
 
-  void lock() { while(lock_.exchange(true, std::memory_order_acquire)); }
+  void lock() {
+    while (lock_.exchange(true, std::memory_order_acquire)) {
+    }
+  }
 
   void unlock() { lock_.store(false, std::memory_order_release); }
 };
@@ -91,20 +97,20 @@ struct SpinLocBoolAtomic {
 
 //////////////////////////////////////////////////////////////////////
 TEST_CASE("SpinLockQueue correct") {
-//   Benchmark bm;
-//   test<CorrectTest<int>, 2>();
-//   test<CorrectTest<int>, 0xff>();
-//   test<CorrectTest<int>, 0xffff>();
-//   test<CorrectTest<int>, 0xffffff>();
-//   test<CorrectTest<double>, 2>();
-//   test<CorrectTest<double>, 0xff>();
-//   test<CorrectTest<double>, 0xffff>();
-//   test<CorrectTest<double>, 0xffffff>();
-//   test<CorrectTest<std::string>, 2>();
-//   test<CorrectTest<std::string>, 0xff>();
-//   test<CorrectTest<std::string>, 0xffff>();
-//   test<CorrectTest<std::string>, 0xffffff>();
-//   bm.count("SpinLockQueue correct");
+  //   Benchmark bm;
+  //   test<CorrectTest<int>, 2>();
+  //   test<CorrectTest<int>, 0xff>();
+  //   test<CorrectTest<int>, 0xffff>();
+  //   test<CorrectTest<int>, 0xffffff>();
+  //   test<CorrectTest<double>, 2>();
+  //   test<CorrectTest<double>, 0xff>();
+  //   test<CorrectTest<double>, 0xffff>();
+  //   test<CorrectTest<double>, 0xffffff>();
+  //   test<CorrectTest<std::string>, 2>();
+  //   test<CorrectTest<std::string>, 0xff>();
+  //   test<CorrectTest<std::string>, 0xffff>();
+  //   test<CorrectTest<std::string>, 0xffffff>();
+  //   bm.count("SpinLockQueue correct");
 }
 
 TEST_CASE("SpinLockQueue perf") {}

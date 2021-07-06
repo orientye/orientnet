@@ -1,3 +1,7 @@
+// Copyright (c) 2021 The orientnet Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file. See the AUTHORS file for names of contributors.
+
 #include "util/concurrent/blocking_queue.h"
 
 #include <atomic>
@@ -32,7 +36,7 @@ void test() {
 template <typename T>
 class CorrectTest {
  public:
-  CorrectTest(std::uint32_t capacity) : produce_finish_(false) {
+  explicit CorrectTest(std::uint32_t capacity) : produce_finish_(false) {
     const size_t sz = test_data_generator_.limit();
     test_data_.reserve(sz);
     for (size_t i = 0; i < sz; ++i) {

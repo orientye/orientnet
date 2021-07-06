@@ -1,3 +1,7 @@
+// Copyright (c) 2021 The orientnet Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file. See the AUTHORS file for names of contributors.
+
 #ifndef UTIL_CONCURRENT_SPSC_QUEUE_H_
 #define UTIL_CONCURRENT_SPSC_QUEUE_H_
 
@@ -10,7 +14,6 @@
 template <typename T>
 T load_consume(T const* addr) {  // hardware fence is implicit on x86
   T v = *const_cast<T const volatile*>(addr);
-  //__memory_barrier();  // compiler fence
   std::atomic_thread_fence(std::memory_order_release);
   return v;
 }
@@ -18,7 +21,6 @@ T load_consume(T const* addr) {  // hardware fence is implicit on x86
 // store with 'release' memory ordering
 template <typename T>
 void store_release(T* addr, T v) {  // hardware fence is implicit on x86
-  //__memory_barrier();               // compiler fence
   std::atomic_thread_fence(std::memory_order_acquire);
   *const_cast<T volatile*>(addr) = v;
 }
@@ -101,4 +103,4 @@ class SPSCQueue {
   SPSCQueue& operator=(SPSCQueue const&);
 };
 
-#endif  //UTIL_CONCURRENT_SPSC_QUEUE_H_
+#endif  // UTIL_CONCURRENT_SPSC_QUEUE_H_

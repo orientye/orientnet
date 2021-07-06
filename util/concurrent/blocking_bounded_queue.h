@@ -1,5 +1,9 @@
-#ifndef UTIL_CONCURRENT_BLOCKGING_BOUNDED_QUEUE_H_
-#define UTIL_CONCURRENT_BLOCKGING_BOUNDED_QUEUE_H_
+// Copyright (c) 2021 The orientnet Authors. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file. See the AUTHORS file for names of contributors.
+
+#ifndef UTIL_CONCURRENT_BLOCKING_BOUNDED_QUEUE_H_
+#define UTIL_CONCURRENT_BLOCKING_BOUNDED_QUEUE_H_
 
 #include <condition_variable>
 #include <cstdint>
@@ -82,4 +86,4 @@ struct BlockingBoundedQueue {
   std::condition_variable cv_not_full;
 };
 
-#endif  // UTIL_CONCURRENT_BLOCKGING_BOUNDED_QUEUE_H_
+#endif  // UTIL_CONCURRENT_BLOCKING_BOUNDED_QUEUE_H_
