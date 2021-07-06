@@ -17,4 +17,4 @@ struct MPMCBoundedQueue {
   MPMCBoundedQueue& operator=(MPMCBoundedQueue&&) = delete;
 };
 
-#endif  //UTIL_CONCURRENT_MPMC_BOUNDED_QUEUE_H_
+#endif  // UTIL_CONCURRENT_MPMC_BOUNDED_QUEUE_H_
