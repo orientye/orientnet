@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <cstdlib>
 #include <new>
+#include <utility>
 
 #include "util/align.h"
 

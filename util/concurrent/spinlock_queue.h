@@ -6,6 +6,7 @@
 #define UTIL_CONCURRENT_SPINLOCK_QUEUE_H_
 
 #include <deque>
+#include <utility>
 
 #include "util/concurrent/spin_lock.h"
 

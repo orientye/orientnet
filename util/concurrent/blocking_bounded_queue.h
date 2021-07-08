@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <mutex>
 #include <new>
+#include <utility>
 
 template <typename T>
 struct BlockingBoundedQueue {
