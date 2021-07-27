@@ -1,7 +1,5 @@
 project(orientnet-test VERSION 0.0.1)
 
-set(CMAKE_UNITY_BUILD ON)
-
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../bin)
 
 add_executable(test)
