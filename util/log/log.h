@@ -1,5 +1,5 @@
-#ifndef _LOG_H_
-#define _LOG_H_
+#ifndef UTIL_LOG_LOG_H_
+#define UTIL_LOG_LOG_H_
 
 #include <cstdint>
 
@@ -22,4 +22,4 @@ class Log {
   void fatal(const char *s);
 };
 
-#endif  //_LOG_H_
+#endif  // UTIL_LOG_LOG_H_

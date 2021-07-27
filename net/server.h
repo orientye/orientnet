@@ -1,4 +1,4 @@
-#ifdef _SERVER_H_
+#ifndef NET_SERVER_H_
+#define NET_SERVER_H_
 
-
-#endif //_SERVER_H_
+#endif  // NET_SERVER_H_

@@ -1,4 +1,4 @@
-#ifdef _CONN_H_
+#ifndef NET_CONN_H_
+#define NET_CONN_H_
 
-
-#endif //_CONN_H_
+#endif  // NET_CONN_H_

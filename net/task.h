@@ -1,4 +1,4 @@
-#ifdef _TASK_H_
+#ifndef NET_TASK_H_
+#define NET_TASK_H_
 
-
-#endif //_TASK_H_
+#endif  // NET_TASK_H_

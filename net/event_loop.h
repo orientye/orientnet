@@ -1,4 +1,4 @@
-#ifdef _EVENT_LOOP_H_
+#ifndef NET_EVENT_LOOP_H_
+#define NET_EVENT_LOOP_H_
 
-
-#endif //_EVENT_LOOP_H_
+#endif  // NET_EVENT_LOOP_H_

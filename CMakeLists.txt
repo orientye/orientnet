@@ -17,6 +17,11 @@ add_library(orientnet STATIC "")
 
 target_compile_features(orientnet PRIVATE cxx_std_17)
 
+target_include_directories(orientnet
+  PRIVATE
+    "."
+)
+
 target_sources(orientnet
   PRIVATE
     "util/concurrent/blocking_bounded_queue.h"
@@ -26,6 +31,8 @@ target_sources(orientnet
     "util/concurrent/spin_lock.h"
     "util/concurrent/spsc_bounded_queue.h"
     "util/concurrent/spsc_queue.h"
+    "util/concurrent/thread_pool.cc"
+    "util/concurrent/thread_pool.h"
     "util/log/log.cc"
     "util/log/log.h"
 )
