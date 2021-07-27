@@ -13,7 +13,7 @@
 #include "test/3rdparty/doctest/doctest.h"
 #include "test/benchmark.h"
 
-namespace {
+namespace BQT {
 
 template <typename T>
 struct TestDataGenerator {
@@ -73,24 +73,24 @@ class CorrectTest {
   std::atomic<bool> produce_finish_;
 };
 
-}  // namespace
+}  // namespace BQT
 
 //////////////////////////////////////////////////////////////////////
 TEST_CASE("BlockingQueue correct") {
-//   Benchmark bm;
-//   test<CorrectTest<int>, 2>();
-//   test<CorrectTest<int>, 0xff>();
-//   test<CorrectTest<int>, 0xffff>();
-//   test<CorrectTest<int>, 0xffffff>();
-//   test<CorrectTest<double>, 2>();
-//   test<CorrectTest<double>, 0xff>();
-//   test<CorrectTest<double>, 0xffff>();
-//   test<CorrectTest<double>, 0xffffff>();
-//   test<CorrectTest<std::string>, 2>();
-//   test<CorrectTest<std::string>, 0xff>();
-//   test<CorrectTest<std::string>, 0xffff>();
-//   test<CorrectTest<std::string>, 0xffffff>();
-//   bm.count("BlockingQueue correct");
+    Benchmark bm;
+    BQT::test<BQT::CorrectTest<int>, 2>();
+    BQT::test<BQT::CorrectTest<int>, 0xff>();
+    BQT::test<BQT::CorrectTest<int>, 0xffff>();
+    BQT::test<BQT::CorrectTest<int>, 0xffffff>();
+    BQT::test<BQT::CorrectTest<double>, 2>();
+    BQT::test<BQT::CorrectTest<double>, 0xff>();
+    BQT::test<BQT::CorrectTest<double>, 0xffff>();
+    BQT::test<BQT::CorrectTest<double>, 0xffffff>();
+    BQT::test<BQT::CorrectTest<std::string>, 2>();
+    BQT::test<BQT::CorrectTest<std::string>, 0xff>();
+    BQT::test<BQT::CorrectTest<std::string>, 0xffff>();
+    BQT::test<BQT::CorrectTest<std::string>, 0xffffff>();
+    bm.count("BlockingQueue correct");
 }
 
 TEST_CASE("BlockingQueue perf") {}

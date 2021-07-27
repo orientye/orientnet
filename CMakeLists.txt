@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
+
+set(CMAKE_UNITY_BUILD ON)
 
 # Keep the version below in sync with the one in orientnet.h
 project(orientnet VERSION 0.0.1 LANGUAGES C CXX)

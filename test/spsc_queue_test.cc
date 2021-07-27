@@ -13,7 +13,7 @@
 #include "test/3rdparty/doctest/doctest.h"
 #include "test/benchmark.h"
 
-namespace {
+namespace SQT {
 
 template <typename T>
 struct TestDataGenerator {
@@ -84,24 +84,24 @@ class CorrectTest {
   std::atomic<bool> produce_finish_;
 };
 
-}  // namespace
+}  // namespace SQT
 
 //////////////////////////////////////////////////////////////////////
 TEST_CASE("SPSCQueue correct") {
-  // Benchmark bm;
-  // test<CorrectTest<int>, 2>();
-  // test<CorrectTest<int>, 0xff>();
-  // test<CorrectTest<int>, 0xffff>();
-  // test<CorrectTest<int>, 0xffffff>();
-  // test<CorrectTest<double>, 2>();
-  // test<CorrectTest<double>, 0xff>();
-  // test<CorrectTest<double>, 0xffff>();
-  // test<CorrectTest<double>, 0xffffff>();
-  // test<CorrectTest<std::string>, 2>();
-  // test<CorrectTest<std::string>, 0xff>();
-  // test<CorrectTest<std::string>, 0xffff>();
-  // test<CorrectTest<std::string>, 0xffffff>();
-  // bm.count("SPSCQueue correct");
+  Benchmark bm;
+  SQT::test<SQT::CorrectTest<int>, 2>();
+  SQT::test<SQT::CorrectTest<int>, 0xff>();
+  SQT::test<SQT::CorrectTest<int>, 0xffff>();
+  SQT::test<SQT::CorrectTest<int>, 0xffffff>();
+  SQT::test<SQT::CorrectTest<double>, 2>();
+  SQT::test<SQT::CorrectTest<double>, 0xff>();
+  SQT::test<SQT::CorrectTest<double>, 0xffff>();
+  SQT::test<SQT::CorrectTest<double>, 0xffffff>();
+  SQT::test<SQT::CorrectTest<std::string>, 2>();
+  SQT::test<SQT::CorrectTest<std::string>, 0xff>();
+  SQT::test<SQT::CorrectTest<std::string>, 0xffff>();
+  SQT::test<SQT::CorrectTest<std::string>, 0xffffff>();
+  bm.count("SPSCQueue correct");
 }
 
 TEST_CASE("SPSCQueue perf") {}

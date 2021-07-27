@@ -10,7 +10,7 @@
 #include "test/benchmark.h"
 #include "util/concurrent/spinlock_queue.h"
 
-namespace {
+namespace SLQT {
 
 template <typename T>
 struct TestDataGenerator {
@@ -80,24 +80,24 @@ class CorrectTest {
   std::atomic<bool> produce_finish_;
 };
 
-}  // namespace
+}  // namespace SLQT
 
 //////////////////////////////////////////////////////////////////////
 TEST_CASE("SpinLockQueue correct") {
-  //   Benchmark bm;
-  //   test<CorrectTest<int>, 2>();
-  //   test<CorrectTest<int>, 0xff>();
-  //   test<CorrectTest<int>, 0xffff>();
-  //   test<CorrectTest<int>, 0xffffff>();
-  //   test<CorrectTest<double>, 2>();
-  //   test<CorrectTest<double>, 0xff>();
-  //   test<CorrectTest<double>, 0xffff>();
-  //   test<CorrectTest<double>, 0xffffff>();
-  //   test<CorrectTest<std::string>, 2>();
-  //   test<CorrectTest<std::string>, 0xff>();
-  //   test<CorrectTest<std::string>, 0xffff>();
-  //   test<CorrectTest<std::string>, 0xffffff>();
-  //   bm.count("SpinLockQueue correct");
+    Benchmark bm;
+    SLQT::test<SLQT::CorrectTest<int>, 2>();
+    SLQT::test<SLQT::CorrectTest<int>, 0xff>();
+    SLQT::test<SLQT::CorrectTest<int>, 0xffff>();
+    SLQT::test<SLQT::CorrectTest<int>, 0xffffff>();
+    SLQT::test<SLQT::CorrectTest<double>, 2>();
+    SLQT::test<SLQT::CorrectTest<double>, 0xff>();
+    SLQT::test<SLQT::CorrectTest<double>, 0xffff>();
+    SLQT::test<SLQT::CorrectTest<double>, 0xffffff>();
+    SLQT::test<SLQT::CorrectTest<std::string>, 2>();
+    SLQT::test<SLQT::CorrectTest<std::string>, 0xff>();
+    SLQT::test<SLQT::CorrectTest<std::string>, 0xffff>();
+    SLQT::test<SLQT::CorrectTest<std::string>, 0xffffff>();
+    bm.count("SpinLockQueue correct");
 }
 
 TEST_CASE("SpinLockQueue perf") {}
