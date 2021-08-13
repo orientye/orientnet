@@ -24,6 +24,8 @@ target_include_directories(orientnet
 
 target_sources(orientnet
   PRIVATE
+    "net/server.cc"
+    "net/server.h"
     "util/concurrent/blocking_bounded_queue.h"
     "util/concurrent/blocking_queue.h"
     "util/concurrent/mpmc_bounded_queue.h"
