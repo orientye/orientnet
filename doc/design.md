@@ -7,9 +7,12 @@
 - 基于C++11
 
 # 并发模型
-- 支持：1到N个io thread, 0-M个worker thread
+- 线程
+    - 1个或更多个io thread, 0个或更多个worker thread
     - 0个worker thread退化为one loop per thread
-- 支持协程: N:1或者N:M
+- 协程
+    - 支持N:1
+    - 支持N:M
 
 # 网络协议
 - 同一个端口支持多种协议
