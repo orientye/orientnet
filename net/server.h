@@ -1,9 +1,13 @@
 #ifndef NET_SERVER_H_
 #define NET_SERVER_H_
 
+#include <string>
+#include <unordered_map>
+
 class Server {
-public:
+ public:
   enum class ServerState { UNINITIALIZED, READY, RUNNING, STOPPING };
+
  public:
   Server();
   ~Server();
@@ -17,7 +21,7 @@ public:
   int clear_services();
 
  private:
-  ServerState state_{ ServerState::Initialized };
+  ServerState state_{ServerState::UNINITIALIZED};
   std::unordered_map<std::string, google::protobuf::Service*> services_;
 };
 
