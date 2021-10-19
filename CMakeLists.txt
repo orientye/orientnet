@@ -20,6 +20,7 @@ target_compile_features(orientnet PRIVATE cxx_std_17)
 target_include_directories(orientnet
   PRIVATE
     "."
+    "./3rdparty/protobuf/src"
 )
 
 target_sources(orientnet

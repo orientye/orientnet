@@ -4,6 +4,8 @@
 #include <string>
 #include <unordered_map>
 
+#include "google/protobuf/service.h"
+
 class Server {
  public:
   enum class ServerState { UNINITIALIZED, READY, RUNNING, STOPPING };
