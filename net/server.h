@@ -1,10 +1,17 @@
 #ifndef NET_SERVER_H_
 #define NET_SERVER_H_
 
+#include <string>
+#include <unordered_map>
+
+#include "google/protobuf/service.h"
+
 class Server {
 public:
   struct Options { };
+ public:
   enum class ServerState { UNINITIALIZED, READY, RUNNING, STOPPING };
+
  public:
   Server();
   ~Server();
@@ -19,7 +26,7 @@ public:
 
  private:
   Options options_;
-  ServerState state_{ ServerState::Initialized };
+  ServerState state_{ServerState::UNINITIALIZED};
   std::unordered_map<std::string, google::protobuf::Service*> services_;
 };
 
