@@ -3,6 +3,7 @@
 
 class Server {
 public:
+  struct Options { };
   enum class ServerState { UNINITIALIZED, READY, RUNNING, STOPPING };
  public:
   Server();
@@ -17,6 +18,7 @@ public:
   int clear_services();
 
  private:
+  Options options_;
   ServerState state_{ ServerState::Initialized };
   std::unordered_map<std::string, google::protobuf::Service*> services_;
 };
