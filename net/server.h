@@ -7,9 +7,12 @@
 #include "google/protobuf/service.h"
 
 class Server {
-public:
-  struct Options { };
  public:
+  struct Options {
+    std::string service_name;
+    std::size_t max_concurrent_requests = 100000;
+    std::size_t max_concurrent_connections = 100000;
+  };
   enum class ServerState { UNINITIALIZED, READY, RUNNING, STOPPING };
 
  public:
