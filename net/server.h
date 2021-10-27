@@ -1,6 +1,7 @@
 #ifndef NET_SERVER_H_
 #define NET_SERVER_H_
 
+#include <cstdint>
 #include <string>
 #include <unordered_map>
 
@@ -19,7 +20,7 @@ class Server {
   Server();
   ~Server();
 
-  int start();
+  int start(const std::string& host, std::uint16_t port);
   int stop();
   int join();
 
