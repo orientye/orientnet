@@ -21,11 +21,11 @@ class Logger {
   void error(const char* s);
   void fatal(const char* s);
 
+  void set_config_file(const char* cf_name);
+
   void set_flush_mode(bool sync);
   void set_level(LogLevel level);
   void set_file(const char* file_name);
-
-  void set_config_file(const char* cf_name);
 };
 
 #endif  // UTIL_LOG_LOG_H_
