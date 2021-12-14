@@ -1,5 +1,14 @@
 #include "util/log/log.h"
 
+Logger::Logger() {}
+
+Logger::~Logger() {}
+
+Logger& Logger::get_logger() {
+  static Logger logger;
+  return logger;
+}
+
 void Logger::trace(const char* s) {}
 void Logger::debug(const char* s) {}
 void Logger::info(const char* s) {}

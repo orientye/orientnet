@@ -1,0 +1,4 @@
+#ifndef UTIL_PLATFORM_LINUX_H_
+#define UTIL_PLATFORM_LINUX_H_
+
+#endif  // UTIL_PLATFORM_UNIX_H_

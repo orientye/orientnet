@@ -13,7 +13,18 @@ class Logger {
     kFatal
   };
 
+ protected:
+  Logger();
+  ~Logger();
+
+  Logger(const Logger&) = delete;
+  Logger& operator=(const Logger&) = delete;
+  Logger(Logger&&) = delete;
+  Logger& operator=(Logger&&) = delete;
+
  public:
+  static Logger& get_logger();
+
   void trace(const char* s);
   void debug(const char* s);
   void info(const char* s);
@@ -26,6 +37,9 @@ class Logger {
   void set_flush_mode(bool sync);
   void set_level(LogLevel level);
   void set_file(const char* file_name);
+
+ private:
+  LogLevel level_;
 };
 
 #endif  // UTIL_LOG_LOG_H_
