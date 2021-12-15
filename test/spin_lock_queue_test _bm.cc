@@ -61,8 +61,8 @@ struct SpinLockPause {
 };
 
 ////////////////////////////////////////////////////////////////////////////////////
-
-struct SpinLockGcc {
+#ifdef __GNUC__
+struct SpinLockGCC {
   volatile int lock_ = 0;
 
   void lock() {
@@ -74,7 +74,7 @@ struct SpinLockGcc {
 
   void unlock() { __sync_lock_release(&lock_); }
 };
-
+#endif
 ////////////////////////////////////////////////////////////////////////////////////
 
 struct SpinLocBoolAtomic {
