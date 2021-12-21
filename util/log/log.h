@@ -34,7 +34,6 @@ class Logger {
 
   void set_config_file(const char* cf_name);
 
-  void set_flush_mode(bool sync);
   void set_level(LogLevel level);
   void set_file(const char* file_name);
 
