@@ -12,6 +12,8 @@ class SyncLogger {
 
  public:
   void critical(const char* s);
+  
+  void set_file(const char* filename);
 };
 
 #endif  // UTIL_LOG_LOG_SYNC_H_
