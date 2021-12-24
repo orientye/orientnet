@@ -3,8 +3,9 @@
 
 #include <windows.h>
 
-typedef int tn_file;
-typedef SOCKET tn_os_sock_t;
-typedef HANDLE tn_os_fd_t;
+namespace tn {
+    using os_socket = SOCKET;
+    using os_fd = HANDLE;
+};
 
 #endif  // UTIL_PLATFORM_WIN_H_
