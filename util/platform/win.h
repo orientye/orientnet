@@ -4,8 +4,8 @@
 #include <windows.h>
 
 namespace tn {
-    using os_socket = SOCKET;
-    using os_fd = HANDLE;
+    using Socket = SOCKET;
+    using FD = HANDLE;
 };
 
 #endif  // UTIL_PLATFORM_WIN_H_

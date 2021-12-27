@@ -41,7 +41,7 @@ class Logger {
 
  private:
   LogLevel level_;
-  tn::os_fd fd_;
+  tn::FD fd_;
 };
 
 #endif  // UTIL_LOG_LOG_H_
