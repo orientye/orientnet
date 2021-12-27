@@ -1,5 +1,8 @@
 #ifndef UTIL_LOG_LOG_SYNC_H_
 #define UTIL_LOG_LOG_SYNC_H_
+
+#include "util/platform.h"
+
 class SyncLogger {
  protected:
   SyncLogger(const char* file_name);
@@ -12,8 +15,11 @@ class SyncLogger {
 
  public:
   void critical(const char* s);
-  
+
   void set_file(const char* filename);
+
+ private:
+  tn::FD fd_;
 };
 
 #endif  // UTIL_LOG_LOG_SYNC_H_
