@@ -1,1 +1,1 @@
-/* config.h.in */
+#cmakedefine ORIENTNET_HAVE_LINUX_IO_URING_H

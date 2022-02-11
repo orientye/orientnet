@@ -1,4 +1,5 @@
 3rdparty/protobuf/
 bin/
 build/
+config.h
 .vscode/

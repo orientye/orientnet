@@ -13,6 +13,10 @@ cmake_dependent_option(ORIENTNET_BUILD_BENCH
   "Build the benchmarks when building unit tests and we are the root project" ON
   "ORIENTNET_BUILD_TEST" OFF)
 
+include(CheckIncludeFiles)
+check_include_files(io_uring.h ORIENTNET_HAVE_LINUX_IO_URING_H)
+configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${PROJECT_SOURCE_DIR}/config.h")
+
 add_library(orientnet STATIC "")
 
 target_compile_features(orientnet PRIVATE cxx_std_17)
