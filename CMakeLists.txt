@@ -14,7 +14,7 @@ cmake_dependent_option(ORIENTNET_BUILD_BENCH
   "ORIENTNET_BUILD_TEST" OFF)
 
 include(CheckIncludeFiles)
-check_include_files(io_uring.h ORIENTNET_HAVE_LINUX_IO_URING_H)
+check_include_files("linux/io_uring.h" ORIENTNET_HAVE_LINUX_IO_URING_H)
 configure_file("${PROJECT_SOURCE_DIR}/config.h.in" "${PROJECT_SOURCE_DIR}/config.h")
 
 add_library(orientnet STATIC "")
