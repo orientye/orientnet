@@ -40,8 +40,6 @@ target_sources(orientnet
     "util/concurrent/spsc_queue.h"
     "util/concurrent/thread_pool.cc"
     "util/concurrent/thread_pool.h"
-    "util/log/log_sync.h"
-    "util/log/log_sync.cc"
     "util/log/log.cc"
     "util/log/log.h"
 )
