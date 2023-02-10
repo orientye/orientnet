@@ -18,7 +18,7 @@ struct Benchmark {
         std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
     auto sceconds = std::chrono::duration<double>(duration).count();
     printf("%s: %llu(nano seconds), %llu(milli seconds), %f(seconds)\n", desc,
-           nano_seconds, milli_seconds, sceconds);
+           (unsigned long long)nano_seconds, (unsigned long long)milli_seconds, sceconds);
     reset();
   }
 
