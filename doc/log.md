@@ -8,6 +8,7 @@
 - thread-safe: 支持
 - crash-safe: 暂不支持
     - 关键日志额外立即存储?
+    - 调试coredump文件?
 - 同步与异步
     - 支持同步
     - 支持异步
