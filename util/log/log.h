@@ -5,6 +5,21 @@
 
 #include "util/platform.h"
 
+#define __log(level, ...)                             \
+  do {                                                \
+    if (level <= Logger::getLogger().getLogLevel()) { \
+      Logger::getLogger().log(level, __VA_ARGS__);    \
+    }                                                 \
+  } while (0)
+#endif
+
+#define LOG_TRACE(...) __log(Logger::kTRACE, __VA_ARGS__)
+#define LOG_DEBUG(...) __log(Logger::kDEBUG, __VA_ARGS__)
+#define LOG_INFO(...) __log(Logger::kINFO, __VA_ARGS__)
+#define LOG_WARN(...) __log(Logger::kWARN, __VA_ARGS__)
+#define LOG_ERROR(...) __log(Logger::kERROR, __VA_ARGS__)
+#define LOG_FATAL(...) __log(Logger::kFATAL, __VA_ARGS__)
+
 class Logger {
   enum class LogLevel : std::int8_t {
     kTrace = 0,
