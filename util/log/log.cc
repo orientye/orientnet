@@ -9,12 +9,7 @@ Logger& Logger::get_logger() {
   return logger;
 }
 
-void Logger::trace(const char* s) {}
-void Logger::debug(const char* s) {}
-void Logger::info(const char* s) {}
-void Logger::warn(const char* s) {}
-void Logger::error(const char* s) {}
-void Logger::fatal(const char* s) {}
+void Logger::log(LogLevel lvl, const char* s) {}
 
 void Logger::set_level(LogLevel level) {}
 void Logger::set_file(const char* filename) {}
