@@ -11,7 +11,6 @@
       Logger::getLogger().log(level, __VA_ARGS__);    \
     }                                                 \
   } while (0)
-#endif
 
 #define LOG_TRACE(...) __log(Logger::kTRACE, __VA_ARGS__)
 #define LOG_DEBUG(...) __log(Logger::kDEBUG, __VA_ARGS__)
