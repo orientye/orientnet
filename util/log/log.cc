@@ -13,3 +13,5 @@ void Logger::log(LogLevel lvl, const char* s) {}
 
 void Logger::set_level(LogLevel level) {}
 void Logger::set_file(const char* filename) {}
+
+void Logger::flush() {}

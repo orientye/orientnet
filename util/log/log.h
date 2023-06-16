@@ -46,6 +46,8 @@ class Logger {
   void set_level(LogLevel level);
   void set_file(const char* filename);
 
+  void flush();
+
  private:
   LogLevel level_;
   tn::FD fd_;
