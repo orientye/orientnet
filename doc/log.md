@@ -1,14 +1,15 @@
 # 设计目标
 - level: 支持
-  
+
 - 目的地:
     - local file(network, db无意义)
 
 - 滚动方式:
     - 按时间大小滚动
     - 按大小滚动
+
 - thread-safe: 支持
-  
+
 - crash-safe: 暂不支持
     - 关键日志额外立即存储?
     - 调试coredump文件?
