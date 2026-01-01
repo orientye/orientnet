@@ -10,18 +10,16 @@
 #include <cstdlib>
 #include <new>
 
-// load with 'consume' (data-dependent) memory ordering
 template <typename T>
-T load_consume(T const* addr) {  // hardware fence is implicit on x86
+T load_consume(T const* addr) {
   T v = *const_cast<T const volatile*>(addr);
-  std::atomic_thread_fence(std::memory_order_release);
+  std::atomic_thread_fence(std::memory_order_acquire);
   return v;
 }
 
-// store with 'release' memory ordering
 template <typename T>
-void store_release(T* addr, T v) {  // hardware fence is implicit on x86
-  std::atomic_thread_fence(std::memory_order_acquire);
+void store_release(T* addr, T v) {
+  std::atomic_thread_fence(std::memory_order_release);
   *const_cast<T volatile*>(addr) = v;
 }
 
@@ -70,12 +68,12 @@ class SPSCQueue {
     node* next_;
     T value_;
   };
-  // consumer partaccessed mainly by consumer, infrequently be producer
+  // consumer part accessed mainly by consumer, infrequently be producer
   node* tail_;  // tail of the queue
   // delimiter between consumer part and producer part,so that they situated on
   // different cache lines
   char cache_line_pad_[cache_line_size];
-  // producer partaccessed only by producer
+  // producer part accessed only by producer
   node* head_;       // head of the queue
   node* first_;      // last unused node (tail of node cache)
   node* tail_copy_;  // helper (points somewhere between first_ and tail_)
@@ -99,8 +97,10 @@ class SPSCQueue {
     return n;
   }
 
-  SPSCQueue(SPSCQueue const&);
-  SPSCQueue& operator=(SPSCQueue const&);
+  SPSCQueue(SPSCQueue const&) = delete;
+  SPSCQueue& operator=(SPSCQueue const&) = delete;
+  SPSCQueue(SPSCQueue&&) = delete;
+  SPSCQueue& operator=(SPSCQueue&&) = delete;
 };
 
 #endif  // UTIL_CONCURRENT_SPSC_QUEUE_H_

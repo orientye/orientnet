@@ -11,10 +11,10 @@ struct MPMCQueue {
 
   ~MPMCQueue() {}
 
-  explicit MPMCQueue(const MPMCFixedCapacityQueue&) = delete;
-  MPMCQueue& operator=(const MPMCFixedCapacityQueue&) = delete;
-  explicit MPMCQueue(MPMCFixedCapacityQueue&&) = delete;
-  MPMCQueue& operator=(MPMCFixedCapacityQueue&&) = delete;
+  MPMCQueue(const MPMCQueue&) = delete;
+  MPMCQueue& operator=(const MPMCQueue&) = delete;
+  MPMCQueue(MPMCQueue&&) = delete;
+  MPMCQueue& operator=(MPMCQueue&&) = delete;
 };
 
 #endif  // UTIL_CONCURRENT_MPMC_QUEUE_H_
