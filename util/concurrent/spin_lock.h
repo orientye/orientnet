@@ -13,6 +13,13 @@ class SpinLock {
  public:
   void lock() {
     while (lock_.test_and_set(std::memory_order_acquire)) {
+      #ifdef __x86_64__
+        __builtin_ia32_pause();
+      #elif defined(__aarch64__)
+        __asm__ __volatile__("yield" ::: "memory");
+      #else
+        std::this_thread::yield();
+      #endif
     }
   }
 
