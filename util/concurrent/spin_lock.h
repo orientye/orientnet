@@ -21,6 +21,12 @@ class SpinLock {
   }
 
   void unlock() { lock_.clear(std::memory_order_release); }
+
+  SpinLock() = default;
+  SpinLock(SpinLock const&) = delete;
+  SpinLock& operator=(SpinLock const&) = delete;
+  SpinLock(SpinLock&&) = delete;
+  SpinLock& operator=(SpinLock&&) = delete;
 };
 
 #endif  // UTIL_CONCURRENT_SPIN_LOCK_H_
